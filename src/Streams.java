@@ -76,12 +76,28 @@ public static void main(String[] args) {
     List<Country> countries = getCountryPopulation(3);
 
     countries.stream().forEach(c->System.out.println(c.getCountryName() +"-" +c.getPopulation()));
-}
+
+
+    List<Country> countryByPopualation = getCountryPop();
+
+    countryByPopualation.stream().forEach(x->System.out.println("Sorted:"+x.getPopulation()));
+
+ }
 
     private static List<Country> getCountryPopulation(int i) {
         return countryList.values().stream()
                 .limit(i)
                 .collect(Collectors.toList());
+
+
+    }
+
+    private static List<Country> getCountryPop(){
+
+    return countryList.values()
+            .stream()
+            .sorted((Comparator.comparingInt(Country::getPopulation)).reversed())
+            .collect(Collectors.toList());
 
 
     }
