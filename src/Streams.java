@@ -1,10 +1,9 @@
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Streams {
+
+    static Map<String, Country>   countryList = new HashMap<>();
 
 public static void main(String[] args) {
 
@@ -64,6 +63,25 @@ public static void main(String[] args) {
             .filter(p->p.value%3==0)
             .count());
 
+    /**
+     * MorganStanley Interview on 25/Apr/2021
+     */
+
+
+    countryList.put("America", new Country(400,"America"));
+    countryList.put("Brazil", new Country(600,"Brazil"));
+    countryList.put("Canada", new Country(100,"Canada"));
+    countryList.put("France", new Country(50,"France"));
+
+    List<Country> countries = getCountryPopulation(3);
+
+    countries.stream().forEach(c->System.out.println(c.getCountryName() +"-" +c.getPopulation()));
+}
+
+    private static List<Country> getCountryPopulation(int i) {
+        return countryList.values().stream()
+                .limit(i)
+                .collect(Collectors.toList());
 
 
     }
