@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class Streams {
@@ -26,6 +27,17 @@ public static void main(String[] args) {
     List<User> users = Arrays.asList(new User(1,"Apple",10),
                                     new User(2,"Ball",20),
                                     new User(3,"cat",30));
+
+            users.stream()
+                    .sorted(Comparator.comparing(User::getName)).collect(Collectors.toList())
+                     .forEach(user -> System.out.println(user.getId()+ ":"+user.getName()+ ":"+user.value));
+
+            users.stream()
+            .sorted((user, t1) -> t1.getName().compareTo(user.getName()))
+            .forEach(user ->System.out.println(user.getId()+ ":"+user.getName()+ ":"+user.value));
+
+
+
 
     // Adding Sum - One way
         System.out.println("// Adding Sum - One way");
@@ -80,7 +92,7 @@ public static void main(String[] args) {
 
     List<Country> countryByPopualation = getCountryPop();
 
-    countryByPopualation.stream().forEach(x->System.out.println("Sorted:"+x.getPopulation()));
+    countryByPopualation.stream().forEach(x->System.out.println("Sorted:"+x.getPopulation() +":"+ x.getCountryName()));
 
  }
 
@@ -98,7 +110,6 @@ public static void main(String[] args) {
             .stream()
             .sorted((Comparator.comparingInt(Country::getPopulation)).reversed())
             .collect(Collectors.toList());
-
 
     }
 
